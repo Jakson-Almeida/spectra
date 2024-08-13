@@ -2,9 +2,13 @@
 
 **Spectra** is a Python-based project designed to read and visualize spectral data from text files. The application processes the spectral data, calculates the resonant wavelength, and displays this information graphically. The main features and future enhancements of this project are outlined below.
 
+![Spectra](https://github.com/Jakson-Almeida/spectra/blob/main/images/interface_spectra.png)
+
 ## Features
 
 - **Read and Visualize Spectral Data**: The application reads spectral data from text files where each line contains frequency and gain values. These values are then plotted to visualize the spectrum.
+
+![Signal](https://github.com/Jakson-Almeida/spectra/blob/main/images/signal.png)
   
 - **Resonant Wavelength Calculation**: The application calculates the resonant wavelength from the provided spectral data and displays it graphically, allowing for easy analysis of resonance points.
 
