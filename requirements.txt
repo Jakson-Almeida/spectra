@@ -1,0 +1,4 @@
+matplotlib
+process_spectra
+scipy
+tkinter
