@@ -12,6 +12,8 @@
   
 - **Resonant Wavelength Calculation**: The application calculates the resonant wavelength from the provided spectral data and displays it graphically, allowing for easy analysis of resonance points.
 
+![wl_res](https://github.com/Jakson-Almeida/spectra/blob/main/images/wl_res.png)
+
 ## Planned Enhancements
 
 - **CSV File Support**: Future versions will support reading spectral data from CSV files. This will include both real and synthetic data.
