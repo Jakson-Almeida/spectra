@@ -1,6 +1,10 @@
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+import numpy as np
 import matplotlib.pyplot as plt
+from _utils import find_wlres, transmission_spectra
+
+PLOT_WL_RES = False  # Definido para exibir o comprimento de onda ressonante
 
 # Função para ler os dados do arquivo e retornar duas listas: frequência e ganho
 def ler_dados_arquivo(caminho_arquivo):
@@ -27,6 +31,19 @@ def ler_dados_arquivo(caminho_arquivo):
 def plotar_espectro(frequencias, ganhos):
     plt.figure(figsize=(10, 6))
     plt.plot(frequencias, ganhos, label='Espectro')
+
+    if PLOT_WL_RES:
+        # Converter listas para arrays numpy
+        frequencias = np.array(frequencias)
+        ganhos = np.array(ganhos)
+        
+        # Encontrar o comprimento de onda ressonante
+        wl_res = find_wlres(frequencias, ganhos, lims=[1510e-9, 1586e-9], prominence=0.01)
+        # Plotar o ponto de comprimento de onda ressonante
+        err = np.abs(frequencias - wl_res)
+        loc = err == min(err)
+        plt.plot(wl_res, ganhos[loc][0], 'ok', label='WL Res')  # Ponto ressonante
+
     plt.xlabel('Frequência')
     plt.ylabel('Ganho')
     plt.title('Espectro de Frequência')
