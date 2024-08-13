@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from _utils import find_wlres, transmission_spectra
 
-PLOT_WL_RES = False  # Definido para exibir o comprimento de onda ressonante
+PLOT_WL_RES = True  # Definido para exibir o comprimento de onda ressonante
 
 # Função para ler os dados do arquivo e retornar duas listas: frequência e ganho
 def ler_dados_arquivo(caminho_arquivo):
@@ -30,7 +30,11 @@ def ler_dados_arquivo(caminho_arquivo):
 # Função para plotar os dados
 def plotar_espectro(frequencias, ganhos):
     plt.figure(figsize=(10, 6))
-    plt.plot(frequencias, ganhos, label='Espectro')
+    
+    # Converter frequências para a mesma escala de wl_res
+    frequencias_nm = np.array(frequencias) * 1e9  # Supondo que wl_res está em nanômetros (nm)
+    
+    plt.plot(frequencias_nm, ganhos, label='Espectro')
 
     if PLOT_WL_RES:
         # Converter listas para arrays numpy
@@ -40,11 +44,11 @@ def plotar_espectro(frequencias, ganhos):
         # Encontrar o comprimento de onda ressonante
         wl_res = find_wlres(frequencias, ganhos, lims=[1510e-9, 1586e-9], prominence=0.01)
         # Plotar o ponto de comprimento de onda ressonante
-        err = np.abs(frequencias - wl_res)
+        err = np.abs(frequencias*1e9 - wl_res)
         loc = err == min(err)
-        plt.plot(wl_res, ganhos[loc][0], 'ok', label='WL Res')  # Ponto ressonante
+        plt.plot(wl_res, ganhos[loc], 'ok', label='WL Res')  # Ponto ressonante
 
-    plt.xlabel('Frequência')
+    plt.xlabel('Frequência (nm)')
     plt.ylabel('Ganho')
     plt.title('Espectro de Frequência')
     plt.legend()
