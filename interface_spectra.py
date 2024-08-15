@@ -46,7 +46,7 @@ def plotar_espectro(frequencias, ganhos):
         # Plotar o ponto de comprimento de onda ressonante
         err = np.abs(frequencias*1e9 - wl_res)
         loc = err == min(err)
-        plt.plot(wl_res, ganhos[loc], 'ok', label='WL Res')  # Ponto ressonante
+        plt.plot(wl_res, ganhos[loc][0], 'ok', label='WL Res')  # Ponto ressonante
         print(f"wl_res: {wl_res}")
         print(f"Ganho: {ganhos[loc][0]}")
         print("")
