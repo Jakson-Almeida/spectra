@@ -48,7 +48,7 @@ def plotar_espectro(frequencias, ganhos):
         loc = err == min(err)
         plt.plot(wl_res, ganhos[loc], 'ok', label='WL Res')  # Ponto ressonante
         print(f"wl_res: {wl_res}")
-        print(f"Ganho: {ganhos[loc]}")
+        print(f"Ganho: {ganhos[loc][0]}")
         print("")
 
     plt.xlabel('Frequência (nm)')
