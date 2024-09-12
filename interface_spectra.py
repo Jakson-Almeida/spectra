@@ -37,19 +37,23 @@ def plotar_espectro(frequencias, ganhos):
     plt.plot(frequencias_nm, ganhos, label='Espectro')
 
     if PLOT_WL_RES:
-        # Converter listas para arrays numpy
-        frequencias = np.array(frequencias)
-        ganhos = np.array(ganhos)
-        
-        # Encontrar o comprimento de onda ressonante
-        wl_res = find_wlres(frequencias, ganhos, lims=[1510e-9, 1586e-9], prominence=0.01)
-        # Plotar o ponto de comprimento de onda ressonante
-        err = np.abs(frequencias*1e9 - wl_res)
-        loc = err == min(err)
-        plt.plot(wl_res, ganhos[loc][0], 'ok', label='WL Res')  # Ponto ressonante
-        print(f"wl_res: {wl_res}")
-        print(f"Ganho: {ganhos[loc][0]}")
-        print("")
+        try:
+            # Converter listas para arrays numpy
+            frequencias = np.array(frequencias)
+            ganhos = np.array(ganhos)
+            
+            # Encontrar o comprimento de onda ressonante
+            wl_res = find_wlres(frequencias, ganhos, lims=[1510e-9, 1586e-9], prominence=0.01)
+            # Plotar o ponto de comprimento de onda ressonante
+            err = np.abs(frequencias*1e9 - wl_res)
+            loc = err == min(err)
+            plt.plot(wl_res, ganhos[loc][0], 'ok', label='WL Res')  # Ponto ressonante
+            print(f"wl_res: {wl_res}")
+            print(f"Ganho: {ganhos[loc][0]}")
+            print("")
+        except Exception as e:
+            print("Erro", f"Ocorreu um erro ao calcular wl_res: {e}")
+            # messagebox.showerror("Erro", f"Ocorreu um erro ao calcular wl_res: {e}")
 
     plt.xlabel('Frequência (nm)')
     plt.ylabel('Ganho')
